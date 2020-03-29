@@ -3,8 +3,8 @@ provider "aws" {
   region = var.region
 }
 
-resource "aws_s3_bucket" "terraform_state" {
-  bucket = "devicenator-terraform-state"
+resource "aws_s3_bucket" "terraform_state_bucket" {
+  bucket = "devicenator-terraform-state-bucket"
   versioning {
     enabled = true
   }
@@ -15,7 +15,7 @@ resource "aws_s3_bucket" "terraform_state" {
 }
 
 resource "aws_dynamodb_table" "terraform_state_lock" {
-  name = "devicentator-terraform-state-locks"
+  name = "devicentator-terraform-state-lock"
   hash_key = "LockID"
   read_capacity = 20
   write_capacity = 20
