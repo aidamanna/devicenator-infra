@@ -1,8 +1,14 @@
-provider "aws" {
-  profile = "default"
-  region = var.region
+terraform {
+  backend "s3" {
+    encrypt = true
+    bucket = "devicenator-state-bucket"
+    region = "eu-west-1"
+    key = "dns-terraform.tfstate"
+    dynamodb_table = "devicentator-state-lock"
+  }
 }
 
-resource "aws_route53_zone" "devicenator" {
-  name = "devicenator.com"
+provider "aws" {
+  profile = "default"
+  region = local.region
 }
